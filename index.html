@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <link rel = "stylesheet" href="style.css">
+</head>
+<body>
+    
+    <h1 class="titulo">NetflixDeLibros</h1>
+    <div class="login-box"> <!-- Contenedor principal del formulario -->
+        <h2>Inicio de Sesión</h2> <!-- Título eque se muestra sobre el formulario -->
+    
+        <form action="pagina1.html" method="get"> <!-- Formulario que usará el método POST. El "#" indica que no envía a ningún lado por ahora -->
+          
+          <label class = "colorlabel"for="email">Correo Gmail:</label> <!-- Etiqueta para el campo del correo -->
+          <input type="email" id="email" name="email" required pattern=".+@gmail\.com">
+          <!-- Campo para escribir el email. 'required' obliga a completarlo. 
+               'pattern' exige que sea una dirección @gmail.com -->
+    
+          <label class = "colorlabel" for="password">Contraseña:</label> <!-- Etiqueta para el campo de contraseña -->
+          <input type="password" id="password" name="password" required>
+          <!-- Campo para escribir la contraseña. 'type="password"' oculta los caracteres -->
+    
+          <input type="submit"  value="Iniciar Sesión" >
+          <!-- Botón para enviar el formulario -->
+    
+        </form>
+      </div>
+
+      
+
+</body>
+</html>
+
+
+
+
+
+
