@@ -1,6 +1,6 @@
 body
 {
-    background-image: url(LP.jpg); /* Color de fondo claro para toda la página */
+    background-image: url(./Imagenes/LP.jpg); /* Color de fondo claro para toda la página */
     display: flex; /* Usamos Flexbox para centrar el contenido */
     background-repeat: no-repeat;
     background-size: cover;
