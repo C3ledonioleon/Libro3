@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Netflix de Libros</title>
+
+    <!-- CSS de Bootstrap -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- CSS del login -->
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- CSS principal del catálogo de libros -->
+    <link rel="stylesheet" href="~/css/libro.css" />
+
+    <!-- Sección opcional para estilos específicos de cada página -->
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+    <!-- HEADER GLOBAL para TODAS las páginas -->
+    <main>
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Sección opcional para scripts específicos de cada página -->
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

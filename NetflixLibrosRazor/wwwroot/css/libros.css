@@ -6,7 +6,7 @@
 
 
 body {
-    background-image: url('./Imagenes/fondo.jpeg');
+    background-image: url('../Imagenes/fondo.jpeg');
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
@@ -83,7 +83,7 @@ header p {
 }
 
 .detalles {
-    display: none; /* oculto por defecto */
+    display:  none ; /* oculto por defecto */
     font-size: 0.9rem;
     color: #999;
     text-align: left;
