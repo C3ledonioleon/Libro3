@@ -1,71 +1,132 @@
-body
-{
-    background-image: url(../Imagenes/LP.jpg); /* Color de fondo claro para toda la página */
+/* =========================
+   FONDO PRINCIPAL
+   ========================= */
+body {
+    background-image: url('../Imagenes/LP.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
 
-    display: flex; /* Usamos Flexbox para centrar el contenido */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    
-    height: 100vh; /* Ocupa el 100% de la altura de la ventana del navegador */
-    margin: 0; /* Elimina márgenes por defecto del navegador */
-    font-family: Arial, sans-serif; /* Fuente que se usará en los textos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
-.login-box {
-    background-color: rgb(0, 0, 0); /* Fondo blanco para la caja del login */
-    padding: 30px; /* Espaciado interno de la caja */
-    border: 2px solid #ff0000; /* Borde oscuro y notorio */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra suave alrededor de la caja */
-    width: 300px; /* Ancho fijo de la caja */
-  }
-  
-  .login-box h2 {
-    text-align: center; /* Centra el título dentro de la caja */
-    margin-bottom: 20px; /* Espacio inferior entre el título y el formulario */
-    color: rgb(165, 21, 21);
-  }
-  
-  .login-box label {
-    display: block; /* Hace que la etiqueta ocupe toda la línea */
-    margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
-  }
-  
-  .login-box input[type="email"],
-  .login-box input[type="password"] {
-    width: 100%; /* El campo ocupa todo el ancho de la caja */
-    padding: 10px; /* Espaciado interno del campo */
-    margin-bottom: 15px; /* Espacio inferior entre campos */
-    border: 1px solid #aaa; /* Borde gris claro */
-    border-radius: 5px; /* Bordes redondeados en los campos */
-  }
-  
-  .login-box input[type="submit"] {
-    width: 100%; /* Botón ocupa todo el ancho */
-    background-color: #1d1616; /* Fondo oscuro para el botón */
-    color: white; /* Texto blanco */
-    border: none; /* Sin borde */
-    padding: 10px; /* Espaciado interno */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* El mouse se transforma en mano al pasar por encima */
-  }
-  
-  .login-box input[type="submit"]:hover {
-    background-color: #555; /* Color más claro al pasar el mouse (hover) */
-  }
-  
 
-  .titulo {
-    font-size: 50px;
-    color: rgb(255, 255, 255);
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .colorlabel
-  {
+/* Spotlight central estilo Netflix */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255,255,255,0.12) 0%,
+        rgba(0,0,0,0.75) 75%
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* =========================
+   TITULO NetflixDeLibros
+   ========================= */
+.titulo {
+    font-size: 40px;
     color: white;
-  }
+    text-shadow: 0 0 15px black;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+
+
+/* =========================
+   CAJA DE LOGIN
+   ========================= */
+.login-box {
+    background: rgba(0, 0, 0, 0.92); /* negro casi puro */
+    border: 2px solid red;
+    padding: 30px;
+    border-radius: 10px;
+    width:  260px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.25);
+}
+
+/* Título dentro de la caja */
+.login-box h2 {
+    color: red;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 22px;
+}
+
+
+
+/* =========================
+   LABELS + INPUTS
+   ========================= */
+.colorlabel {
+    color: white;
+    font-size: 15px;
+}
+
+.login-box input[type="email"],
+.login-box input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+
+
+/* =========================
+   BOTÓN
+   ========================= */
+.login-box input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: #1c1c1c;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.login-box input[type="submit"]:hover {
+    background: #333;
+}
+
+
+
+/* =========================
+   LINKS
+   ========================= */
+.login-box p {
+    margin-top: 10px;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+.login-box a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+.login-box a:hover {
+    text-decoration: underline;
+}

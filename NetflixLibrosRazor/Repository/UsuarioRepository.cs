@@ -1,10 +1,10 @@
 using Dapper;
 using MySql.Data.MySqlClient;
 using NetflixLibrosRazor.Models;
-using sveDapper.Factories;
+using NetflixLibrosRazor.Repository.Factories;
 
-namespace NetflixLibrosRazor.Repositories
-{
+namespace NetflixLibrosRazor.Repositories;
+
 public class UsuarioRepository : IUsuarioRepository
 {
     private readonly IDbConnectionFactory _connectionFactory;
@@ -35,4 +35,4 @@ public class UsuarioRepository : IUsuarioRepository
         
         }
     }
-}
+

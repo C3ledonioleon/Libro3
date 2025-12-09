@@ -9,8 +9,19 @@
 <header>
     <h1>Netflix de Libros</h1>
     <p>Explora una selección de libros recomendados.</p>
-</header>
 
+    <!-- Menú hamburguesa -->
+    <div class="menu-container">
+        <div class="hamburger">&#9776;</div>
+        <nav class="menu">
+             <a href="/Libros/Crear">Crear Libro</a>
+            <a href="/">Inicio</a>
+            <a href="/Usuarios/Registro">Registrarse</a>
+            <a href="/Usuarios/Login">Login</a>
+            <a href="/Libros/Index">Buscar Libro</a>
+        </nav>
+    </div>
+</header>
 
         <section class="libros">
         
@@ -304,4 +315,11 @@
     <p>&copy; 2025 Mi Biblioteca. Todos los derechos reservados.</p>
 </footer>
 
-<script src="~/js/libros.js"></script>
+<script>
+    const hamburger = document.querySelector('.hamburger');
+    const menu = document.querySelector('.menu');
+
+    hamburger.addEventListener('click', () => {
+        menu.classList.toggle('active');
+    });
+</script>

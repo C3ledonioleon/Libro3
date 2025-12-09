@@ -9,3 +9,12 @@ CREATE TABLE Usuario(
     Email VARCHAR(100) NOT NULL UNIQUE,
     Password VARCHAR(100) NOT NULL
 );
+
+CREATE TABLE Libro (
+    IdLibro INT AUTO_INCREMENT PRIMARY KEY,
+    Titulo VARCHAR(200) NOT NULL,
+    Autor VARCHAR(150) NOT NULL,
+    Descripcion TEXT,
+    Genero VARCHAR(100),
+    PortadaUrl VARCHAR(300)
+);

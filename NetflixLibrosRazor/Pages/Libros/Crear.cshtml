@@ -1,0 +1,49 @@
+@page
+@model NetflixLibrosRazor.Pages.Libros.CrearModel
+
+@{
+    ViewData["Title"] = "Crear Libro";
+}
+
+<link rel="stylesheet" href="~/css/crear.css">
+
+<h2>Crear Libro</h2>
+
+<form method="post">
+    <div>
+        <label>Título</label>
+        <input asp-for="Libro.Titulo" class="form-control" />
+        <span asp-validation-for="Libro.Titulo" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Autor</label>
+        <input asp-for="Libro.Autor" class="form-control" />
+        <span asp-validation-for="Libro.Autor" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Descripción</label>
+        <textarea asp-for="Libro.Descripcion" class="form-control"></textarea>
+        <span asp-validation-for="Libro.Descripcion" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Género</label>
+        <input asp-for="Libro.Genero" class="form-control" />
+        <span asp-validation-for="Libro.Genero" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>URL de Portada</label>
+        <input asp-for="Libro.PortadaUrl" class="form-control" />
+        <span asp-validation-for="Libro.PortadaUrl" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Guardar Libro</button>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

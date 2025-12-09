@@ -98,3 +98,52 @@ footer {
     width: 100%;
     bottom: 0;
 }
+/* Contenedor del menú */
+.menu-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end; /* menú al costado derecho */
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Icono hamburguesa */
+.hamburger {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #fff;
+    user-select: none;
+}
+
+/* Menú oculto por defecto */
+.menu {
+    display: none;
+    position: absolute;
+    top: 50px; /* debajo del icono */
+    right: 20px;
+    background-color: rgba(63,2,2,0.95);
+    border-radius: 5px;
+    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+/* Cuando se activa */
+.menu.active {
+    display: flex;
+}
+
+/* Estilos de los links del menú */
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.menu a:hover {
+    background-color: #8b0000;
+    border-radius: 4px;
+}
