@@ -5,39 +5,44 @@ using NetflixLibrosRazor.Services;
 
 namespace NetflixLibrosRazor.Pages.Libros
 {
-    public class CrearModel : PageModel
+    public class CreateModel : PageModel
     {
         private readonly ILibroService _libroService;
+        private readonly IWebHostEnvironment _env;
 
-        public CrearModel(ILibroService libroService)
+        public CreateModel(ILibroService libroService, IWebHostEnvironment env)
         {
             _libroService = libroService;
+            _env = env;
         }
 
         [BindProperty]
-        public LibroCreateDto Libro { get; set; } = new LibroCreateDto();
+        public LibroCreateDto Libro { get; set; } = new();
 
-        public string Mensaje { get; set; } = string.Empty;
-
-        public void OnGet()
-        {
-        }
+        [BindProperty]
+        public IFormFile? ImagenFile { get; set; }
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-                return Page();
+            if (ImagenFile != null)
+            {
+                string carpeta = Path.Combine(_env.WebRootPath, "Imagenes");
+                Directory.CreateDirectory(carpeta);
 
-            try
-            {
-                _libroService.AgregarLibro(Libro);
-                return RedirectToPage("/Libros/Lista");
+                string nombreArchivo = Guid.NewGuid() + Path.GetExtension(ImagenFile.FileName);
+                string ruta = Path.Combine(carpeta, nombreArchivo);
+
+                using (var stream = new FileStream(ruta, FileMode.Create))
+                {
+                    ImagenFile.CopyTo(stream);
+                }
+
+                // Guardamos la ruta pública para mostrarla luego (coincide con la carpeta wwwroot/Imagenes)
+                Libro.Imagen = $"/Imagenes/{nombreArchivo}";
             }
-            catch (Exception ex)
-            {
-                Mensaje = ex.Message;
-                return Page();
-            }
+
+            _libroService.AgregarLibro(Libro);
+            return RedirectToPage("/Index");
         }
     }
 }

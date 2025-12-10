@@ -9,7 +9,6 @@ namespace NetflixLibrosRazor.Pages.Usuarios
     {
         private readonly IUsuarioService _usuarioService;
 
-        // Constructor que recibe el servicio de usuarios mediante inyección de dependencias
         public RegistroModel(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
@@ -34,14 +33,20 @@ namespace NetflixLibrosRazor.Pages.Usuarios
 
             try
             {
-                // Llama al servicio para registrar el usuario
-                _usuarioService.Register(RegisterDto);
+                // Llama al servicio para registrar el usuario y obtener el id
+                var id = _usuarioService.Register(RegisterDto);
 
-                // Mensaje de éxito
-                Mensaje = "Usuario registrado correctamente!";
-
-                // Redirige a la página principal
-                return RedirectToPage("/Index");
+                if (id > 0)
+                {
+                    // Mensaje de éxito (puede mostrarse antes de redirigir o guardarse en TempData)
+                    TempData["RegistroExito"] = "Usuario registrado correctamente.";
+                    return RedirectToPage("/Index");
+                }
+                else
+                {
+                    Mensaje = "No se pudo registrar el usuario. Intente nuevamente.";
+                    return Page();
+                }
             }
             catch (Exception ex)
             {

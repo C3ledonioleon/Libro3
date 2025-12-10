@@ -1,49 +1,37 @@
 @page
-@model NetflixLibrosRazor.Pages.Libros.CrearModel
+@model CreateModel
 
+<link rel="stylesheet" href="~/css/crear.css" asp-append-version="true" />
 @{
     ViewData["Title"] = "Crear Libro";
 }
 
-<link rel="stylesheet" href="~/css/crear.css">
-
 <h2>Crear Libro</h2>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <div>
-        <label>Título</label>
-        <input asp-for="Libro.Titulo" class="form-control" />
-        <span asp-validation-for="Libro.Titulo" class="text-danger"></span>
+        <label>Título:</label>
+        <input asp-for="Libro.Titulo" />
     </div>
-
     <div>
-        <label>Autor</label>
-        <input asp-for="Libro.Autor" class="form-control" />
-        <span asp-validation-for="Libro.Autor" class="text-danger"></span>
+        <label>Autor:</label>
+        <input asp-for="Libro.Autor" />
     </div>
-
     <div>
-        <label>Descripción</label>
-        <textarea asp-for="Libro.Descripcion" class="form-control"></textarea>
-        <span asp-validation-for="Libro.Descripcion" class="text-danger"></span>
+        <label>Género:</label>
+        <input asp-for="Libro.Genero" />
     </div>
-
     <div>
-        <label>Género</label>
-        <input asp-for="Libro.Genero" class="form-control" />
-        <span asp-validation-for="Libro.Genero" class="text-danger"></span>
+        <label>Sinopsis:</label>
+        <textarea asp-for="Libro.Sinopsis"></textarea>
     </div>
-
     <div>
-        <label>URL de Portada</label>
-        <input asp-for="Libro.PortadaUrl" class="form-control" />
-        <span asp-validation-for="Libro.PortadaUrl" class="text-danger"></span>
+        <label>URL del libro</label>
+        <input asp-for="Libro.UrlLibro" placeholder="https://..." />
     </div>
-
-    <br />
-
-    <button type="submit" class="btn btn-primary">Guardar Libro</button>
+    <div>
+        <label>Portada:</label>
+        <input type="file" asp-for="ImagenFile" />
+    </div>
+    <button type="submit">Crear</button>
 </form>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

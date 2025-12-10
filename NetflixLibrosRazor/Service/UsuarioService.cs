@@ -2,7 +2,8 @@ using System.Security.Cryptography;
 using System.Text;
 using NetflixLibrosRazor.DTOs;
 using NetflixLibrosRazor.Models;
-
+using MySql.Data.MySqlClient;
+using Dapper;
 using NetflixLibrosRazor.Repositories;
 namespace NetflixLibrosRazor.Services;
 
@@ -25,10 +26,10 @@ public class UsuarioService : IUsuarioService
         var usuario = new Usuario
         {
             Email = registerDto.Email,
-            Password = HashPassword(registerDto.Contraseña),
+            Password = HashPassword(registerDto.Password),
+            Rol = RolUsuario.Usuario
         };
         
-
         return _usuarioRepository.Add(usuario);
     }
 
@@ -49,5 +50,30 @@ public class UsuarioService : IUsuarioService
         return usuario.Password == hashedInputPassword;
     }
 
+    public Usuario? ObtenerPorId(int id)
+    {
+         return _usuarioRepository.GetById(id);
+    }
+
+    public int DeleteUsuario(int id, int rolActual)
+    {
+        // Solo administrador (rol = 1) puede eliminar usuarios
+        if (rolActual != (int)RolUsuario.Administrador)
+            throw new UnauthorizedAccessException("No tienes permisos para eliminar usuarios. Solo el administrador puede hacerlo.");
+
+        return _usuarioRepository.Delete(id);
+    }
+
+    public List<Usuario> ObtenerTodos()
+    {
+        using var connection = new MySqlConnection(_configuration.GetConnectionString("myBD"));
+        var usuarios = connection.Query<Usuario>("SELECT * FROM Usuario ORDER BY Email").ToList();
+        return usuarios;
+    }
+
+    public Usuario? ObtenerPorEmail(string email)
+    {
+        return _usuarioRepository.GetByEmail(email);
+    }
 }
 

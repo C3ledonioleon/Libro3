@@ -4,7 +4,7 @@
     ViewData["Title"] = "Registro de Usuario";
 }
 @section Styles {
-    <link rel="stylesheet" href="~/css/registro.css" />
+    <link rel="stylesheet" href="~/css/registro.css" asp-append-version="true" />
 }
 <div class="container mt-5" style="max-width: 500px;">
     <h2 class="mb-4 text-center">Registro de Usuario</h2>
@@ -22,9 +22,9 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="RegisterDto.Contraseña" class="form-label">Contraseña</label>
-            <input asp-for="RegisterDto.Contraseña" type="password" class="form-control" placeholder="Ingrese su contraseña" />
-            <span asp-validation-for="RegisterDto.Contraseña" class="text-danger"></span>
+            <label asp-for="RegisterDto.Password" class="form-label">Contraseña</label>
+            <input asp-for="RegisterDto.Password" type="password" class="form-control" placeholder="Ingrese su contraseña" />
+            <span asp-validation-for="RegisterDto.Password" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary w-100">Registrarse</button>

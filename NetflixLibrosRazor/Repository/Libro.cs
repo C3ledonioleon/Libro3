@@ -33,8 +33,8 @@ public class LibroRepository : ILibroRepository
         using var connection = _connectionFactory.CreateConnection();
 
         string sql = @"
-            INSERT INTO Libro (Titulo, Autor, Descripcion, Genero, PortadaUrl)
-            VALUES (@Titulo, @Autor, @Descripcion, @Genero, @PortadaUrl);
+            INSERT INTO Libro (Titulo, Autor, Sinopsis, Genero, Imagen, UrlLibro)
+            VALUES (@Titulo, @Autor, @Sinopsis, @Genero, @Imagen, @UrlLibro);
             SELECT LAST_INSERT_ID();";
 
         int newId = connection.ExecuteScalar<int>(sql, libro);
@@ -50,9 +50,10 @@ public class LibroRepository : ILibroRepository
             UPDATE Libro
             SET Titulo = @Titulo,
                 Autor = @Autor,
-                Descripcion = @Descripcion,
+                Sinopsis = @Sinopsis,
                 Genero = @Genero,
-                PortadaUrl = @PortadaUrl
+                Imagen = @Imagen,
+                UrlLibro = @UrlLibro
             WHERE IdLibro = @IdLibro";
         int rows = connection.Execute(sql, new { IdLibro = id });
         return rows > 0 ? id : 0; ;

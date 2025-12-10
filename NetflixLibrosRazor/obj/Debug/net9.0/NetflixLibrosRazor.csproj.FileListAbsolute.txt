@@ -165,11 +165,11 @@ C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\N
 C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\NetflixLibrosRazor.genruntimeconfig.cache
 C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\ref\NetflixLibrosRazor.dll
 C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\compressed\7x4spe11vm-v81esh3h3a.gz
-C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\compressed\o6y6evudms-g6gwwu71vv.gz
-C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\compressed\zzybuedpx2-ij3f8fj9se.gz
 C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\bin\Debug\net9.0\FluentValidation.dll
 C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\bin\Debug\net9.0\FluentValidation.AspNetCore.dll
 C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\bin\Debug\net9.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\NetflixLibrosRazor.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\compressed\fzr3c89o6w-wdywe0auu4.gz
+C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\compressed\o6y6evudms-fy0oh2czgp.gz
 C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\compressed\w2s0bqufp6-w7o4aoctxz.gz
+C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\compressed\zzybuedpx2-ij3f8fj9se.gz
+C:\Users\Celedonio\Documents\GitHub\Libro3\NetflixLibrosRazor\obj\Debug\net9.0\compressed\fzr3c89o6w-qsob6ly7g8.gz

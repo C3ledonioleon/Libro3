@@ -12,6 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 // ============================
 builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 builder.Services.AddScoped<IDbConnectionFactory, RoleBasedDbConnectionFactory>();
 
@@ -25,20 +31,18 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IValidator<LibroCreateDto>, LibroValidator>();
 builder.Services.AddScoped<IValidator<LibroUpdateDto>, LibroUpdateValidator>();
 
+builder.Services.AddScoped<LibroService>(); // o AddSingleton / AddTransient según tu necesidad
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseSession();
 
 app.MapRazorPages();
-
-
 // =========================================================
-// ===============   ENDPOINTS MINIMAL API   ===============
-// =========================================================
-
-// -------------------- Crear libro --------------------
+// ====================== ENDPOINTS LIBROS ==================
 app.MapPost("/api/libros", (ILibroService service, LibroCreateDto dto,IValidator<LibroCreateDto> validator) =>
 {
     var result = validator.Validate(dto);

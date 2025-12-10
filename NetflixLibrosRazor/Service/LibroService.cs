@@ -21,9 +21,10 @@ namespace NetflixLibrosRazor.Services
                 IdLibro = l.IdLibro,
                 Titulo = l.Titulo,
                 Autor = l.Autor,
-                Descripcion = l.Descripcion,
+                Sinopsis = l.Sinopsis,
                 Genero = l.Genero,
-                PortadaUrl = l.PortadaUrl
+               Imagen  = l.Imagen,
+               UrlLibro = l.UrlLibro
             }).ToList();
         }
 
@@ -38,9 +39,10 @@ namespace NetflixLibrosRazor.Services
             {
                 Titulo = dto.Titulo,
                 Autor = dto.Autor,
-                Descripcion = dto.Descripcion,
+                Sinopsis = dto.Sinopsis,
                 Genero = dto.Genero,
-                PortadaUrl = dto.PortadaUrl
+                Imagen = dto.Imagen,
+                UrlLibro = dto.UrlLibro
             };
 
             return _repo.Add(dto);
@@ -53,9 +55,10 @@ namespace NetflixLibrosRazor.Services
                 IdLibro = id,            // El ID viene por parámetro
                 Titulo = dto.Titulo,
                 Autor = dto.Autor,
-                Descripcion = dto.Descripcion,
+                Sinopsis = dto.Sinopsis,
                 Genero = dto.Genero,
-                PortadaUrl = dto.PortadaUrl
+                Imagen = dto.Imagen,
+                UrlLibro = dto.UrlLibro
             };
 
             return _repo.Update(id, dto);

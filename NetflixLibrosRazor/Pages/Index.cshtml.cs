@@ -41,7 +41,16 @@ namespace NetflixLibrosRazor.Pages
                 return Page();
             }
 
-            // Login exitoso, redirigimos a la página de libros
+            // Login exitoso: guardar sesión del usuario
+            var usuarioAutenticado = _usuarioService.ObtenerPorEmail(LoginDto.Email);
+            
+            if (usuarioAutenticado != null)
+            {
+                HttpContext.Session.SetString("UsuarioEmail", usuarioAutenticado.Email);
+                HttpContext.Session.SetInt32("UsuarioRol", (int)usuarioAutenticado.Rol);
+                HttpContext.Session.SetInt32("UsuarioId", usuarioAutenticado.IdUsuario);
+            }
+
             return RedirectToPage("/Libros/Index");
         }
     }

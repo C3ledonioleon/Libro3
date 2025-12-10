@@ -1,6 +1,4 @@
-/* =========================
-   FONDO PRINCIPAL
-   ========================= */
+
 body {
     background-image: url('../Imagenes/LP.jpg');
     background-repeat: no-repeat;
@@ -34,9 +32,7 @@ body::after {
     z-index: -1;
 }
 
-/* =========================
-   TITULO NetflixDeLibros
-   ========================= */
+
 .titulo {
     font-size: 40px;
     color: white;
@@ -46,10 +42,6 @@ body::after {
 }
 
 
-
-/* =========================
-   CAJA DE LOGIN
-   ========================= */
 .login-box {
     background: rgba(0, 0, 0, 0.92); /* negro casi puro */
     border: 2px solid red;
@@ -67,11 +59,6 @@ body::after {
     font-size: 22px;
 }
 
-
-
-/* =========================
-   LABELS + INPUTS
-   ========================= */
 .colorlabel {
     color: white;
     font-size: 15px;
@@ -89,11 +76,6 @@ body::after {
     font-size: 15px;
 }
 
-
-
-/* =========================
-   BOTÓN
-   ========================= */
 .login-box input[type="submit"] {
     width: 100%;
     padding: 12px;
@@ -111,10 +93,6 @@ body::after {
 }
 
 
-
-/* =========================
-   LINKS
-   ========================= */
 .login-box p {
     margin-top: 10px;
     color: white;

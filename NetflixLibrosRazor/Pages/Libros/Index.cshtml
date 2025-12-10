@@ -4,316 +4,68 @@
     ViewData["Title"] = "Netflix de Libros";
 }
 
-<link rel="stylesheet" href="~/css/libros.css" />
+<link rel="stylesheet" href="~/css/libros.css" asp-append-version="true" />
 
 <header>
     <h1>Netflix de Libros</h1>
     <p>Explora una selección de libros recomendados.</p>
 
-    <!-- Menú hamburguesa -->
-    <div class="menu-container">
-        <div class="hamburger">&#9776;</div>
-        <nav class="menu">
-             <a href="/Libros/Crear">Crear Libro</a>
-            <a href="/">Inicio</a>
-            <a href="/Usuarios/Registro">Registrarse</a>
-            <a href="/Usuarios/Login">Login</a>
-            <a href="/Libros/Index">Buscar Libro</a>
-        </nav>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+            <p style="margin: 0; color: #666;">Conectado como: <strong>@Model.UsuarioEmail</strong></p>
+            @if (Model.RolUsuario == (int)NetflixLibrosRazor.Models.RolUsuario.Administrador)
+            {
+                <p style="margin: 5px 0 0 0; color: #d9534f;"><strong>👤 Rol: Administrador</strong></p>
+            }
+            else
+            {
+                <p style="margin: 5px 0 0 0; color: #5cb85c;"><strong>👤 Rol: Usuario</strong></p>
+            }
+        </div>
+        <div class="menu-container">
+            <div class="hamburger">&#9776;</div>
+            <nav class="menu">
+                <a href="/Libros/Crear">➕ Crear Libro</a>
+                @if (Model.RolUsuario == (int)NetflixLibrosRazor.Models.RolUsuario.Administrador)
+                {
+                    <a href="/Admin/Usuarios">👥 Gestionar Usuarios</a>
+                }
+                <a href="/" onclick="return confirm('¿Deseas cerrar sesión?');">🚪 Cerrar Sesión</a>
+            </nav>
+        </div>
     </div>
+
+    <form method="get">
+        <input type="text" name="SearchTerm" value="@Model.SearchTerm" placeholder="Buscar libro..." />
+        <button type="submit">Buscar</button>
+    </form>
 </header>
 
-        <section class="libros">
-        
-        <article class="libro" onclick="mostrarDetalles('libro1')">
-            <img src="./Imagenes/los juegos del.jpg" alt="Los juegos del Hambre" />
-            <h2>Los juegos del Hambre</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro1" class="detalles">
-                <p><strong>Autor:</strong> Suzanne Collins</p>
-                <p><strong>Género:</strong> A Ciencia ficción, aventura distópica</p>
-                <p><strong>Sinopsis:</strong> En un futuro post-apocalíptico, la nación de Panem organiza los Juegos del Hambre, un evento anual donde un chico y una chica de cada distrito deben luchar hasta la muerte. Katniss Everdeen se ofrece como tributo en lugar de su hermana menor, iniciando una lucha por la supervivencia y la rebelión.</p>
+<section class="libros">
+    @foreach (var libro in Model.Libros)
+    {
+        <article class="libro" onclick="mostrarDetalles('libro_@libro.IdLibro')">
+            <img src="@libro.Imagen" alt="@libro.Titulo" />
+            <h2>@libro.Titulo</h2>
+
+            <div id="libro_@libro.IdLibro" class="detalles" style="display:none;">
+                <a href="@libro.UrlLibro" target="_blank">Leer libro</a>
+                <p><strong>Autor:</strong> @libro.Autor</p>
+                <p><strong>Género:</strong> @libro.Genero</p>
+                <p><strong>Sinopsis:</strong> @libro.Sinopsis</p>
+
+                <!-- Botón Eliminar solo para administrador (rol = 1) -->
+                @if (Model.RolUsuario == (int)NetflixLibrosRazor.Models.RolUsuario.Administrador)
+                {
+                    <form method="post" asp-page-handler="Eliminar" asp-route-id="@libro.IdLibro"
+                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar este libro? Esta acción no se puede deshacer.');">
+                        <button type="submit" class="btn-eliminar">Eliminar Libro</button>
+                    </form>
+                }
             </div>
         </article>
-
-
-        <article class="libro" onclick="mostrarDetalles('libro2')">
-            <img src="./Imagenes/llamas.jpg" alt="Los juegos del Hambre" />
-            <h2>En Llamas</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro2" class="detalles">
-                <p><strong>Autor:</strong> Suzanne Collins</p>
-                <p><strong>Género:</strong>  Ciencia ficción, aventura distópica</p>
-                <p><strong>Sinopsis:</strong> Tras ganar los Juegos, Katniss se convierte en símbolo de resistencia. Los 75º Juegos del Hambre, conocidos como el Vasallaje de los Veinticinco, reúnen a tributos anteriores, poniendo a Katniss y Peeta nuevamente en peligro.</p>
-            </div>
-        </article>
-
-        <article class="libro" onclick="mostrarDetalles('libro3')">
-            <img src="./Imagenes/sinsajo.jpg" alt="Los juegos del Hambre" />
-            <h2>Sinsajo </h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro3" class="detalles">
-                <p><strong>Autor:</strong> Suzanne Collins</p>
-                <p><strong>Género:</strong>  Ciencia ficción, aventura distópica</p>
-                <p><strong>Sinopsis:</strong>La rebelión contra el Capitolio se intensifica. Katniss asume el rol de "Sinsajo", el símbolo de la revolución, enfrentando desafíos personales y políticos en la guerra por la libertad.</p>
-            </div>
-        </article>
-
-         <article class="libro" onclick="mostrarDetalles('libro4')">
-            <img src="./Imagenes/sinsajo parte 2.webp" alt="Los juegos del Hambre" />
-            <h2>Sinsajo part 2</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro4" class="detalles">
-                <p><strong>Autor:</strong> Suzanne Collins</p>
-                <p><strong>Género:</strong> Ciencia ficción, aventura distópica</p>
-                <p><strong>Sinopsis:</strong>La rebelión contra el Capitolio se intensifica. Katniss asume el rol de "Sinsajo", el símbolo de la revolución, enfrentando desafíos personales y políticos en la guerra por la libertad. </p>
-            </div>
-        </article>
-
-
-         <article class="libro" onclick="mostrarDetalles('libro5')">
-            <img src="./Imagenes/pájaros cantores .jpg" alt="Los juegos del Hambre" />
-            <h2>Pájaros cantores y Serpientes</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro5" class="detalles">
-                <p><strong>Autor:</strong> Suzanne Collins</p>
-                <p><strong>Género:</strong> Ciencia ficción, aventura distópica</p>
-                <p><strong>Sinopsis:</strong>  Situada 64 años antes de los eventos originales, narra la juventud de Coriolanus Snow, futuro presidente de Panem, y su participación en los 10º Juegos del Hambre.</p>
-            </div>
-        </article>
-
-
-           <article class="libro" onclick="mostrarDetalles('libro6')">
-            <img src="./Imagenes/st.webp" alt="Stranger Things" />
-            <h2>Stranger Things</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro6" class="detalles">
-                <p><strong>Autor:</strong>Matt y Ross Duffer</p>
-                <p><strong>Género:</strong>Misterio, thriller</p>
-                <p><strong>Sinopsis:</strong>
-                En la década de 1980, en el pueblo ficticio de Hawkins, Indiana, un grupo de niños enfrenta fenómenos paranormales y criaturas de una dimensión alterna llamada "El Otro Lado".</p>
-            </div>
-        </article>
-
-           <article class="libro" onclick="mostrarDetalles('libro7')">
-            <img src="./Imagenes/st2.webp" alt="Stranger Things" />
-            <h2>Stranger Things </h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro7" class="detalles">
-                <p><strong>Autor:</strong>Matt y Ross Duffer</p>
-                <p><strong>Género:</strong>Misterio, thriller</p>
-                <p><strong>Sinopsis:</strong>La inspectora Amaia Salazar regresa a su pueblo natal en Navarra para investigar una serie de asesinatos que parecen estar relacionados con leyendas locales.</p>
-            </div>
-        </article>
-
-         <article class="libro" onclick="mostrarDetalles('libro8')">
-            <img src="./Imagenes/st3.avif" alt="Stranger Things" />
-            <h2>Stranger Things </h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro8" class="detalles">
-                <p><strong>Autor:</strong>Matt y Ross Duffer</p>
-                <p><strong>Género:</strong>Misterio, thriller</p>
-                <p><strong>Sinopsis:</strong>Amaia Salazar continúa su investigación mientras enfrenta secretos familiares y oscuros misterios del pasado.</p>
-            </div>
-        </article>
-
-         <article class="libro" onclick="mostrarDetalles('libro9')">
-            <img src="./Imagenes/st4.webp" alt="Stranger Things" />
-            <h2>Stranger Things </h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro9" class="detalles">
-                <p><strong>Autor:</strong>Matt y Ross Duffer</p>
-                <p><strong>Género:</strong>Misterio, thriller </p>
-                <p><strong>Sinopsis:</strong>Amaia Salazar se enfrenta a una conspiración que involucra rituales y asesinatos, mientras busca la verdad detrás de los crímenes.</p>
-            </div>
-        </article>
-
-        <article class="libro" onclick="mostrarDetalles('libro10')">
-            <img src="./Imagenes/st5.jpeg" alt="Stranger Things" />
-            <h2>Stranger Things </h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro10" class="detalles">
-                <p><strong>Autor:</strong>Matt y Ross Duffer</p>
-                <p><strong>Género:</strong>Misterio, thriller</p>
-                <p><strong>Sinopsis:</strong>Un joven establece una amistad con un anciano millonario, y tras su muerte, descubre que puede comunicarse con él a través de un teléfono móvil.</p>
-            </div>
-        </article>
-
-        <article class="libro" onclick="mostrarDetalles('libro11')">
-            <img src="./Imagenes/el guardian.jpg" alt="El guardian Invisible" />
-            <h2>El guardian Invisible </h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro11" class="detalles">
-                <p><strong>Autor:</strong> Juan Pérez</p>
-                <p><strong>Género:</strong> Aventura</p>
-                <p><strong>Sinopsis:</strong> Un joven se embarca en un viaje que cambiará su vida para siempre.</p>
-            </div>
-        </article>
-
-        <article class="libro" onclick="mostrarDetalles('libro12')">
-            <img src="./Imagenes/legado.jpg" alt="Legado de los Huesos " />
-            <h2>Legado de los Huesos</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro12" class="detalles">
-                <p><strong>Autor:</strong> Dolores Redondo </p>
-                <p><strong>Género:</strong> Misterio </p>
-                <p><strong>Sinopsis:</strong> En esta segunda entrega de la Trilogía del Baztán, la inspectora Amaia Salazar regresa al valle de Baztán, en Navarra, para enfrentarse a un nuevo caso inquietante. Durante un juicio en el que ella debe testificar, el acusado se suicida dejando una nota con una sola palabra: "Tarttalo". </p>
-            </div>
-        </article>
-
-
-        <article class="libro" onclick="mostrarDetalles('libro13')">
-            <img src="./Imagenes/ofrenda.jpg" alt="Ofrenda a la Tormenta" />
-            <h2>Ofrenda a la Tormenta </h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro13" class="detalles">
-                <p><strong>Autor:</strong> Dolores Redondo </p>
-                <p><strong>Género:</strong> Novela negra / Thriller / Misterio </p>
-                <p><strong>Sinopsis:</strong> Después de los impactantes eventos de Legado de los huesos, la inspectora Amaia Salazar continúa enfrentándose a una serie de muertes misteriosas en el valle de Baztán. Esta vez, las víctimas son bebés que mueren en sus cunas, en aparentes casos de síndrome de muerte súbita infantil. </p>
-            </div>
-        </article>
-
-        <article class="libro" onclick="mostrarDetalles('libro14')">
-            <img src="./Imagenes/harri.jpeg" alt="mr harrigan's phone" />
-            <h2>Mr harrigan's phone</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro14" class="detalles">
-                <p><strong>Autor:</strong> Stephen King </p>
-                <p><strong>Género:</strong> Terror  </p>
-                <p><strong>Sinopsis:</strong> La historia sigue a Craig, un joven que trabaja para el anciano Mr. Harrigan, un hombre rico y solitario. Craig le regala a Mr. Harrigan un teléfono móvil antiguo, y ambos desarrollan una relación especial basada en la comunicación a través de ese dispositivo. </p>
-            </div>
-        </article>
-
-        <article class="libro" onclick="mostrarDetalles('libro15')">
-            <img src="./Imagenes/maldita.webp" alt="Maldita" />
-            <h2>Maldita</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro15" class="detalles">
-                <p><strong>Autor:</strong> Thomas Wheeler </p>
-                <p><strong>Género:</strong> Fantasía épica / Reimaginación mitológica </p>
-                <p><strong>Sinopsis:</strong> Maldita cuenta la historia de Nimue, una joven druida con poderes mágicos, que tras el ataque a su aldea recibe la misión de entregar una espada antigua a un hechicero legendario. En su camino, se une al mercenario Arturo y a los Inefables para enfrentarse a fuerzas oscuras y desafiar el poder establecido.  </p>
-            </div>
-        </article>
-
-
-         <article class="libro" onclick="mostrarDetalles('libro16')">
-            <img src="./Imagenes/Secretos del pasado.webp" alt="Secretos del Pasado" />
-            <h2>Secretos del Pasado</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro16" class="detalles">
-                <p><strong>Autor:</strong> Checko E. Martínez </p>
-                <p><strong>Género:</strong> Checko E. Martínez  </p>
-                <p><strong>Sinopsis:</strong>Ryan Goth se muda con su familia a Terrance Mullen y descubre un mundo sobrenatural. Enterado de que es uno de los Cinco Guerreros del Círculo Protector, debe encontrar a los otros miembros y enfrentar peligros que amenazan su vida y a los suyos.</p>
-            </div>
-        </article>
-
-        <article class="libro" onclick="mostrarDetalles('libro17')">
-            <img src="./Imagenes/circulo.jpg" alt="Circle" />
-            <h2>Circle</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro17" class="detalles">
-                <p><strong>Autor:</strong> Thomas Wheeler </p>
-                <p><strong>Género:</strong>  Fantasía épica / Reimaginación mitológica </p>
-                <p><strong>Sinopsis:</strong> Nimue, una joven druida marginada, debe entregar una antigua espada a un hechicero tras el ataque a su aldea. En su camino, se une al mercenario Arturo y a los Inefables para enfrentar fuerzas oscuras y desafiar el poder establecido. </p>
-            </div>
-        </article>
-
-         <article class="libro" onclick="mostrarDetalles('libro18')">
-            <img src="./Imagenes/xx.jpg" alt="XX" />
-            <h2>XX</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro18" class="detalles">
-                <p><strong>Autor:</strong> Annie Clark </p>
-                <p><strong>Género:</strong> Terror, horror, antología. </p>
-                <p><strong>Sinopsis:</strong> "XX" es una de terror antológica con cuatro relatos dirigidos por mujeres, que exploran distintos tipos de miedo, desde lo psicológico hasta lo sobrenatural, mostrando una perspectiva femenina única en el género.</p>
-            </div>
-        </article>
-
-
-         <article class="libro" onclick="mostrarDetalles('libro19')">
-            <img src="./Imagenes/SHIMMER.jpg" alt="Shimmer Lake" />
-            <h2>Shimmer Lake</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro19" class="detalles">
-                <p><strong>Autor:</strong>  Oren Uziel </p>
-                <p><strong>Género:</strong> Thriller, crimen, misterio </p>
-                <p><strong>Sinopsis:</strong> Se desarrolla al revés en el tiempo, comenzando con un evento final y retrocediendo para revelar los hechos que llevaron a ese punto. La historia sigue a un sheriff local mientras investiga el robo a un banco y trata de capturar a un criminal astuto y peligroso. </p>
-            </div>
-        </article>
-
-        <article class="libro" onclick="mostrarDetalles('libro20')">
-            <img src="./Imagenes/The_Queen's_Gambit_(miniseries).png" alt=" The Queen Gambit" />
-            <h2>The Queen Gambit</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro20" class="detalles">
-                <p><strong>Autor:</strong> Walter Tevis </p>
-                <p><strong>Género:</strong> Drama </p>
-                <p><strong>Sinopsis:</strong> The Queen’s Gambit narra la vida de Beth Harmon, una joven huérfana con un talento excepcional para el ajedrez, quien enfrenta sus luchas internas mientras asciende hasta convertirse en campeona mundial.</p>
-            </div>
-        </article>
-
-        <article class="libro" onclick="mostrarDetalles('libro21')">
-            <img src="./Imagenes/brigerton 1.jpg" alt="Brigerton" />
-            <h2>Brigerton</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro21" class="detalles">
-                <p><strong>Autor:</strong> Julia Quinn</p>
-                <p><strong>Género:</strong> Drama romántico </p>
-                <p><strong>Sinopsis:</strong> Bridgerton narra la vida de la aristocrática familia Bridgerton en la Londres de la Regencia, mostrando sus romances, secretos y escándalos en un mundo lleno de intrigas y pasiones.</p>
-            </div>
-        </article>
-
-
-         <article class="libro" onclick="mostrarDetalles('libro22')">
-            <img src="./Imagenes/brigerton 2.jpg" alt="Brigerton" />
-            <h2>Brigerton</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro22" class="detalles">
-                <p><strong>Autor:</strong> Julia Quinn</p>
-                <p><strong>Género:</strong> Romance histórico</p>
-                <p><strong>Sinopsis:</strong> En la alta sociedad londinense durante la Regencia inglesa, la familia Bridgerton enfrenta escándalos, romances y secretos. Cada miembro de la familia vive sus propios enredos amorosos mientras navegan las estrictas normas sociales de la época.   </p>
-            </div>
-        </article>
-
-         <article class="libro" onclick="mostrarDetalles('libro23')">
-            <img src="./Imagenes/brigerton 3.webp" alt="Los Brigerton" />
-            <h2>Brigerton</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro23" class="detalles">
-                <p><strong>Autor:</strong> Julia Quinn</p>
-                <p><strong>Género:</strong> drama romántico</p>
-                <p><strong>Sinopsis:</strong> Los Bridgerton sigue la vida de ocho hermanos pertenecientes a una influyente familia aristocrática en la Londres de la Regencia. A través de sus amores, secretos y escándalos, la serie explora las complejidades del romance y las expectativas sociales en una época marcada por la rigidez de la alta sociedad.</p>
-            </div>
-        </article>
-
-        <article class="libro" onclick="mostrarDetalles('libro24')">
-            <img src="./Imagenes/enola.jpg" alt="Enola Holmes" />
-            <h2>Enola Holmes</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro24" class="detalles">
-                <p><strong>Autor:</strong> Nancy Springer</p>
-                <p><strong>Género:</strong> Misterio, aventura, juvenil</p>
-                <p><strong>Sinopsis:</strong> Enola Holmes, la hermana menor de Sherlock Holmes, se embarca en la búsqueda de su madre desaparecida. Mientras enfrenta peligros y resuelve misterios, lucha por su independencia en una sociedad que limita a las mujeres, demostrando astucia y valentía.</p>
-            </div>
-        </article>
-
-          <article class="libro" onclick="mostrarDetalles('libro25')">
-            <img src="./Imagenes/enola 2.jpg" alt="Enola Holmes" />
-            <h2>Enola Holmes</h2>
-            <p class="descripcion">Una aventura épica llena de sorpresas.</p>
-            <div id="libro25" class="detalles">
-                <p><strong>Autor:</strong> Harry Bradbeer </p>
-                <p><strong>Género:</strong> Misterio, aventura, drama </p>
-                <p><strong>Sinopsis:</strong> Enola Holmes, la hermana menor del famoso detective Sherlock Holmes, regresa para resolver un nuevo misterio que pone en riesgo la libertad de las jóvenes trabajadoras en Londres. En esta aventura, Enola se enfrenta a peligros y conspiraciones mientras busca justicia. </p>
-            </div>
-        </article>
-
-
-    </section>
-
-<footer>
-    <p>&copy; 2025 Mi Biblioteca. Todos los derechos reservados.</p>
-</footer>
+    }
+</section>
 
 <script>
     const hamburger = document.querySelector('.hamburger');
@@ -322,4 +74,9 @@
     hamburger.addEventListener('click', () => {
         menu.classList.toggle('active');
     });
+
+    function mostrarDetalles(id) {
+        const detalles = document.getElementById(id);
+        detalles.style.display = detalles.style.display === "none" ? "block" : "none";
+    }
 </script>

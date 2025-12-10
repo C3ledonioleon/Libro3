@@ -29,9 +29,6 @@ public class RoleBasedDbConnectionFactory : IDbConnectionFactory
       
        var user = _httpContextAccessor.HttpContext?.User;
 
-        // ❗ Si NO hay usuario autenticado, usamos la conexión general
-        //    (esto permite que Login funcione!)
-        
          if (user == null || !user.Identity!.IsAuthenticated)
         {
             return new MySqlConnection(_configuration.GetConnectionString("myBD"));
