@@ -10,35 +10,21 @@
     <h1>Netflix de Libros</h1>
     <p>Explora una selección de libros recomendados.</p>
 
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <div>
-            <p style="margin: 0; color: #666;">Conectado como: <strong>@Model.UsuarioEmail</strong></p>
-            @if (Model.RolUsuario == (int)NetflixLibrosRazor.Models.RolUsuario.Administrador)
-            {
-                <p style="margin: 5px 0 0 0; color: #d9534f;"><strong>👤 Rol: Administrador</strong></p>
-            }
-            else
-            {
-                <p style="margin: 5px 0 0 0; color: #5cb85c;"><strong>👤 Rol: Usuario</strong></p>
-            }
-        </div>
         <div class="menu-container">
             <div class="hamburger">&#9776;</div>
             <nav class="menu">
-                <a href="/Libros/Crear">➕ Crear Libro</a>
-                @if (Model.RolUsuario == (int)NetflixLibrosRazor.Models.RolUsuario.Administrador)
-                {
-                    <a href="/Admin/Usuarios">👥 Gestionar Usuarios</a>
-                }
-                <a href="/" onclick="return confirm('¿Deseas cerrar sesión?');">🚪 Cerrar Sesión</a>
+                <a href="/Libros/Crear"> Crear Libro</a>
+                <a href="/" onclick="return confirm('¿Deseas cerrar sesión?');"> Cerrar Sesión</a>
             </nav>
         </div>
     </div>
 
-    <form method="get">
-        <input type="text" name="SearchTerm" value="@Model.SearchTerm" placeholder="Buscar libro..." />
-        <button type="submit">Buscar</button>
-    </form>
+            <form method="get" class="search-wrapper">
+                <input type="text" name="SearchTerm" value="@Model.SearchTerm" placeholder="Buscar libro..." />
+                <button type="submit" class="search-icon">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
 </header>
 
 <section class="libros">

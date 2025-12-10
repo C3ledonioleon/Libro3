@@ -161,3 +161,45 @@ footer {
 .btn-eliminar:hover {
     background-color: darkred;
 }
+
+/* ===== BUSCADOR CON LUPA INTEGRADA ===== */
+
+.search-wrapper {
+    position: relative;
+    width: 350px;
+    margin: 25px auto;
+}
+
+.search-wrapper input {
+    width: 100%;
+    padding: 12px 20px;
+    padding-right: 48px; /* espacio para la lupa */
+    border-radius: 30px;
+    border: 1px solid #444;
+    background: #111;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.search-wrapper input:focus {
+    border-color: #E50914;
+}
+
+.search-wrapper .search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #E50914;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.search-wrapper .search-icon:hover {
+    color: #b00610;
+}
