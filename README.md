@@ -1,76 +1,130 @@
-# 📚 Libro3 – Aplicación Razor Pages estilo “Netflix de Libros”
+## ✨ Integrantes
 
-Proyecto grupal desarrollado en **ASP.NET Core Razor Pages**, cuyo objetivo es implementar una plataforma de visualización, administración y exploración de libros inspirada en la experiencia de Netflix.
-
----
-
-## 🚀 Características principales
-
-- 🗂️ **Listado y filtrado de libros**  
-- 🔍 **Búsqueda por título, autor y categoría**
-- 👁️ **Páginas Razor con patrón MVVM**
-- 🗃️ **Modelos y DTOs organizados**
-- 💾 **Repositorio y servicios con separación de responsabilidades**
-- ✔️ **Validaciones mediante clases en `/Validador`**
-- 🎨 **UI moderna con archivos estáticos en `wwwroot`**
+* Leon Flores, Celedonio
+* Ramirez, Luján
+* Gonzalez, Sofia
 
 ---
 
-## 🏗️ Estructura del proyecto
+## 📝 Descripción General del Proyecto
 
+El proyecto **Libro3** es una aplicación desarrollada con **ASP.NET Core Razor Pages**, inspirada en la experiencia de plataformas como Netflix, pero orientada a la visualización y gestión de libros.
+
+El sistema permite:
+
+* Visualizar libros con información detallada.
+* Filtrar y buscar por género, autor o título.
+* Administrar libros desde capas separadas.
+* Utilizar DTOs, repositorios y servicios para una arquitectura limpia.
+* Validar datos mediante clases dedicadas.
+* Renderizar páginas dinámicas con Razor Pages.
+
+---
+
+## 🧱 Arquitectura del Proyecto
+
+El proyecto está organizado siguiendo una estructura clara y mantenible:
+
+### 1. **Models**
+
+* Entidades principales del sistema.
+* Representación de los libros y otros objetos de dominio.
+
+### 2. **DTOs**
+
+* Objetos para transferencia de datos entre capas.
+* Separación entre entidad y datos expuestos a la UI.
+
+### 3. **Repository**
+
+* Acceso a datos.
+* Métodos CRUD encapsulados.
+* Comunicación con la fuente de datos (JSON/DB según implementación).
+
+### 4. **Service**
+
+* Lógica de negocio.
+* Procesamiento de datos antes de llegar a la UI.
+
+### 5. **Validador**
+
+* Validaciones de datos.
+* Reglas personalizadas por entidad.
+
+### 6. **Pages (Razor Pages)**
+
+* Vista principal del sistema.
+* Renderizado de listas de libros.
+* Navegación y búsqueda.
+
+### 7. **wwwroot**
+
+* Archivos estáticos: imágenes, CSS, JS.
+
+---
+
+## 🔄 Flujo General del Sistema
+
+1. El usuario accede a la página principal.
+2. Razor Page solicita datos al **Service**.
+3. El Service procesa la petición y consulta al **Repository**.
+4. Repository devuelve los datos solicitados.
+5. El Service aplica reglas, validaciones o filtros.
+6. Los datos son enviados a la Razor Page como modelos o DTOs.
+7. La interfaz muestra los libros al usuario.
+
+---
+
+## 📚 Módulos del Sistema
+
+### ✔ Listado de libros  
+### ✔ Visualización de detalles  
+### ✔ Filtros por título, género y autor  
+### ✔ Gestión desde servicios y repositorios  
+### ✔ Validación de datos  
+### ✔ Recursos estáticos (imágenes, estilos, scripts)  
+
+---
+
+## 🛠 Tecnologías Utilizadas
+
+* .NET 6+  
+* ASP.NET Core Razor Pages  
+* C#  
+* AutoMapper (opcional según implementación)  
+* Bootstrap / CSS para estilos  
+* JSON o base de datos (dependiendo del repositorio usado)
+
+---
+
+## 🚧 Estado Actual del Proyecto
+
+✔ Razor Pages implementadas  
+✔ Modelos y DTOs definidos  
+✔ Servicios funcionales  
+✔ Repositorios creados  
+✔ Interfaz estilo catálogo  
+
+Pendiente:
+
+* Mejoras visuales  
+* Expansión de catálogo  
+* Opcional: agregar autenticación  
+
+---
+
+## 📌 Estructura del Proyecto
+
+```txt
 Libro3/
-│
-├── NetflixLibrosRazor/
-│ ├── Models/ # Entidades de dominio
-│ ├── DTOs/ # Objetos de transferencia de datos
-│ ├── Repository/ # Capa de acceso a datos
-│ ├── Service/ # Lógica de negocio
-│ ├── Validador/ # Validadores personalizados
-│ ├── Pages/ # Razor Pages (UI)
-│ ├── wwwroot/ # CSS, JS, imágenes
-│ ├── Program.cs # Configuración principal
-│ └── appsettings.json # Configuración de entorno
-│
-└── script.js # Scripts generales
-
-yaml
-Copiar código
-
----
-
-## ⚙️ Requisitos
-
-- .NET 6 o superior  
-- Visual Studio 2022 o VS Code  
-- SDK de ASP.NET Core  
-
----
-
-## ▶️ Cómo ejecutar el proyecto
-
-1. Clonar o descargar el repositorio.
-2. Abrir la solución `Libro3.sln`.
-3. Restaurar dependencias:
-
-```bash
-dotnet restore
-Ejecutar la aplicación:
-
-bash
-Copiar código
-dotnet run --project NetflixLibrosRazor
-Abrir en el navegador:
-
-arduino
-Copiar código
-https://localhost:5001
-👥 Trabajo en equipo
-Este proyecto se desarrolló de manera grupal aplicando buenas prácticas de programación, diseño y organización.
-
-📄 Licencia
-Proyecto académico — uso educativo.
-
-markdown
-Copiar código
-
-Si querés, puedo **generarlo como archivo README.md listo para descargar**. ¿Querés que lo cree?
+├── NetflixLibrosRazor
+│   ├── Models
+│   ├── DTOs
+│   ├── Repository
+│   ├── Service
+│   ├── Validador
+│   ├── Pages
+│   ├── wwwroot
+│   ├── Program.cs
+│   └── appsettings.json
+└── script.js
