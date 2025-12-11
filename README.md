@@ -1,8 +1,8 @@
 ## ✨ Integrantes
 
 * Leon Flores, Celedonio
+* Diego, Algañaras 
 * Ramirez, Luján
-* Gonzalez, Sofia
 
 ---
 
@@ -88,7 +88,7 @@ El proyecto está organizado siguiendo una estructura clara y mantenible:
 
 ## 🛠 Tecnologías Utilizadas
 
-* .NET 6+  
+* .NET 9  
 * ASP.NET Core Razor Pages  
 * C#  
 * AutoMapper (opcional según implementación)  
@@ -104,12 +104,6 @@ El proyecto está organizado siguiendo una estructura clara y mantenible:
 ✔ Servicios funcionales  
 ✔ Repositorios creados  
 ✔ Interfaz estilo catálogo  
-
-Pendiente:
-
-* Mejoras visuales  
-* Expansión de catálogo  
-* Opcional: agregar autenticación  
 
 ---
 
