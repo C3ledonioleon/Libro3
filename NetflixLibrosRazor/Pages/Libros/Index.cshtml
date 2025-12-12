@@ -13,7 +13,10 @@
         <div class="menu-container">
             <div class="hamburger">&#9776;</div>
             <nav class="menu">
-                <a href="/Libros/Crear"> Crear Libro</a>
+                @if (Model.RolUsuario == (int)NetflixLibrosRazor.Models.RolUsuario.Administrador)
+                {
+                    <a href="/Libros/Crear"> Crear Libro</a>
+                }
                 <a href="/" onclick="return confirm('¿Deseas cerrar sesión?');"> Cerrar Sesión</a>
             </nav>
         </div>

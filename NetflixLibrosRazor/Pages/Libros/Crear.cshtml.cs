@@ -22,6 +22,27 @@ namespace NetflixLibrosRazor.Pages.Libros
         [BindProperty]
         public IFormFile? ImagenFile { get; set; }
 
+            public IActionResult OnGet()
+            {
+                // Verificar que el usuario esté autenticado
+                var emailSession = HttpContext.Session.GetString("UsuarioEmail");
+                if (string.IsNullOrEmpty(emailSession))
+                {
+                    TempData["Error"] = "Debes iniciar sesión primero.";
+                    return RedirectToPage("/Index");
+                }
+
+                // Verificar que el usuario sea administrador (rol = 1)
+                var rolSession = HttpContext.Session.GetInt32("UsuarioRol") ?? 2;
+                if (rolSession != 1) // 1 = Administrador
+                {
+                    TempData["Error"] = "No tienes permisos para crear libros. Solo los administradores pueden hacerlo.";
+                    return RedirectToPage("/Libros/Index");
+                }
+
+                return Page();
+            }
+
         public IActionResult OnPost()
         {
             if (ImagenFile != null)

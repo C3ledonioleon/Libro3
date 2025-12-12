@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NetflixLibrosRazor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+edba3400044a15beebfa4052e58fcf8f3a087a1d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d81ce7447015d20731deca73e89a419866fb5bd2")]
 [assembly: System.Reflection.AssemblyProductAttribute("NetflixLibrosRazor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NetflixLibrosRazor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
